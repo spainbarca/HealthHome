@@ -58,12 +58,21 @@
             min-width: 44px;
             justify-content: center;
         }
+
+        #userForm .form-control,
+        #userForm .form-select {
+            min-height: 42px;
+        }
     </style>
 
 @endsection
 
 
 @section('main_content')
+
+    {{-- ========================================================= --}}
+    {{-- PAGE TITLE --}}
+    {{-- ========================================================= --}}
 
     <div class="container-fluid">
 
@@ -72,7 +81,11 @@
             <div class="row">
 
                 <div class="col-sm-6">
-                    <h3>Users Management</h3>
+
+                    <h3>
+                        Users Management
+                    </h3>
+
                 </div>
 
                 <div class="col-sm-6">
@@ -110,34 +123,17 @@
     </div>
 
 
+    {{-- ========================================================= --}}
+    {{-- FORM --}}
+    {{-- ========================================================= --}}
+
     <div class="container-fluid">
 
         <div class="row">
 
-            <div class="col-sm-12">
+            <div class="col-12 col-xxl-10 mx-auto">
 
-                <div class="card">
-
-                    <div class="card-header">
-
-                        <h5>
-                            Crear usuario
-                        </h5>
-
-                        <span>
-                            Registre la información del usuario
-                            y su perfil personal.
-                        </span>
-
-                    </div>
-
-                    <div class="col-12 col-xxl-10 mx-auto">
-<br>
-                        {!! $form->getCode() !!}
-
-                    </div>
-
-                </div>
+                {!! $form->getCode() !!}
 
             </div>
 

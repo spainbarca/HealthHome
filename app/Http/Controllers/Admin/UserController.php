@@ -63,7 +63,11 @@ class UserController extends Controller
 
         return view(
             'admin.user.create',
-            compact('user', 'form')
+            compact(
+                'user',
+                'form',
+                'countries'
+            )
         );
     }
 
@@ -87,11 +91,36 @@ class UserController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function edit(User $user)
-    {
-        $user->load('persona');
-        $countries = Country::all()->pluck('name','id');
-        return view('admin.user.edit', ['user' => $user, 'roles' => $this->role->get()], compact('countries'));
+    public function edit(
+        User $user,
+        UserFormBuilder $userFormBuilder
+    ) {
+        $user->load([
+            'persona',
+            'roles',
+            'media',
+        ]);
+
+        $countries = Country::query()
+            ->orderBy('name')
+            ->pluck('name', 'id');
+
+        $roles = $this->role->get();
+
+        $form = $userFormBuilder->edit(
+            $user,
+            $roles,
+            $countries
+        );
+
+        return view(
+            'admin.user.edit',
+            compact(
+                'user',
+                'form',
+                'countries'
+            )
+        );
     }
 
     /**

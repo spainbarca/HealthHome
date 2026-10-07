@@ -10,13 +10,68 @@ use phpformbuilder\Form;
 
 class UserFormBuilder
 {
+    /*
+    |--------------------------------------------------------------------------
+    | CREATE
+    |--------------------------------------------------------------------------
+    */
+
     public function create(
         User $user,
         $roles,
         $countries
     ): Form {
+        return $this->build(
+            $user,
+            $roles,
+            $countries,
+            false
+        );
+    }
 
-        require_once base_path('phpformbuilder/autoload.php');
+    /*
+    |--------------------------------------------------------------------------
+    | EDIT
+    |--------------------------------------------------------------------------
+    */
+
+    public function edit(
+        User $user,
+        $roles,
+        $countries
+    ): Form {
+        return $this->build(
+            $user,
+            $roles,
+            $countries,
+            true
+        );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | BUILD
+    |--------------------------------------------------------------------------
+    */
+
+    private function build(
+        User $user,
+        $roles,
+        $countries,
+        bool $editing = false
+    ): Form {
+
+        require_once base_path(
+            'phpformbuilder/autoload.php'
+        );
+
+        /*
+         * Limpiamos la sesión interna de PHP Form Builder.
+         *
+         * Los valores los restauraremos nosotros utilizando old()
+         * y los datos existentes del modelo.
+         */
+        Form::clear('userForm');
 
         /*
         |--------------------------------------------------------------------------
@@ -31,16 +86,40 @@ class UserFormBuilder
             'bs5'
         );
 
-        $form->setAction(
-            route('admin.user.store'),
-            false
-        );
+        /*
+        |--------------------------------------------------------------------------
+        | Action
+        |--------------------------------------------------------------------------
+        */
 
+        if ($editing) {
+
+            $form->setAction(
+                route(
+                    'admin.user.update',
+                    $user->id
+                ),
+                false
+            );
+
+        } else {
+
+            $form->setAction(
+                route('admin.user.store'),
+                false
+            );
+        }
+
+        /*
+         * HTML solamente soporta GET/POST.
+         *
+         * Laravel utiliza _method=PUT para actualización.
+         */
         $form->setMethod('POST');
 
         /*
         |--------------------------------------------------------------------------
-        | CSRF Laravel
+        | CSRF
         |--------------------------------------------------------------------------
         */
 
@@ -52,6 +131,21 @@ class UserFormBuilder
 
         /*
         |--------------------------------------------------------------------------
+        | Method Spoofing Laravel
+        |--------------------------------------------------------------------------
+        */
+
+        if ($editing) {
+
+            $form->addInput(
+                'hidden',
+                '_method',
+                'PUT'
+            );
+        }
+
+        /*
+        |--------------------------------------------------------------------------
         | Errores Laravel
         |--------------------------------------------------------------------------
         */
@@ -60,7 +154,61 @@ class UserFormBuilder
 
         /*
         |--------------------------------------------------------------------------
-        | CUENTA
+        | CABECERA
+        |--------------------------------------------------------------------------
+        */
+
+        $form->addHtml(
+            '
+            <div class="user-form-header mb-4">
+
+                <div class="d-flex align-items-center">
+
+                    <div class="user-form-icon me-3">
+
+                        <i class="' .
+                            (
+                                $editing
+                                    ? 'fa-solid fa-user-pen'
+                                    : 'fa-solid fa-user-plus'
+                            ) .
+                        '"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h4 class="mb-1">
+                            ' .
+                            (
+                                $editing
+                                    ? 'Editar usuario'
+                                    : 'Nuevo usuario'
+                            ) .
+                        '
+                        </h4>
+
+                        <p class="text-muted mb-0">
+                            ' .
+                            (
+                                $editing
+                                    ? 'Actualice la cuenta y la información personal del usuario.'
+                                    : 'Registre la cuenta y la información personal utilizada para los controles médicos.'
+                            ) .
+                        '
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+            '
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | INFORMACIÓN DE CUENTA
         |--------------------------------------------------------------------------
         */
 
@@ -68,12 +216,12 @@ class UserFormBuilder
             $form,
             'fa-solid fa-user',
             'Información de cuenta',
-            'Datos principales del usuario'
+            'Datos principales para identificar y autenticar al usuario.'
         );
 
         /*
         |--------------------------------------------------------------------------
-        | Nombres
+        | Nombre / Apellido
         |--------------------------------------------------------------------------
         */
 
@@ -101,12 +249,6 @@ class UserFormBuilder
         $form->endCol();
 
 
-        /*
-        |--------------------------------------------------------------------------
-        | Apellidos
-        |--------------------------------------------------------------------------
-        */
-
         $form->startCol(6, 'md');
 
         $form->addIcon(
@@ -129,7 +271,6 @@ class UserFormBuilder
         $form->endCol();
 
         $form->endRow();
-
 
         /*
         |--------------------------------------------------------------------------
@@ -161,12 +302,6 @@ class UserFormBuilder
         $form->endCol();
 
 
-        /*
-        |--------------------------------------------------------------------------
-        | Confirmación email
-        |--------------------------------------------------------------------------
-        */
-
         $form->startCol(6, 'md');
 
         $form->addIcon(
@@ -183,13 +318,12 @@ class UserFormBuilder
                 $user->email ?? ''
             ),
             'Confirmar correo',
-            'required,placeholder=Repita el correo'
+            'required,placeholder=Repita el correo electrónico'
         );
 
         $form->endCol();
 
         $form->endRow();
-
 
         /*
         |--------------------------------------------------------------------------
@@ -199,6 +333,10 @@ class UserFormBuilder
 
         $form->startRow('g-3');
 
+        /*
+         * Password
+         */
+
         $form->startCol(6, 'md');
 
         $form->addIcon(
@@ -207,27 +345,42 @@ class UserFormBuilder
             'before'
         );
 
-        $form->addHelper(
-            'Mínimo 8 caracteres',
-            'password'
-        );
+        if ($editing) {
 
-        $form->addInput(
-            'password',
-            'password',
-            '',
-            'Contraseña',
-            'required,minlength=8,autocomplete=new-password,placeholder=Ingrese una contraseña'
-        );
+            $form->addHelper(
+                'Déjelo vacío para conservar la contraseña actual.',
+                'password'
+            );
+
+            $form->addInput(
+                'password',
+                'password',
+                '',
+                'Nueva contraseña',
+                'minlength=8,autocomplete=new-password,placeholder=Nueva contraseña'
+            );
+
+        } else {
+
+            $form->addHelper(
+                'Debe contener como mínimo 8 caracteres.',
+                'password'
+            );
+
+            $form->addInput(
+                'password',
+                'password',
+                '',
+                'Contraseña',
+                'required,minlength=8,autocomplete=new-password,placeholder=Ingrese una contraseña'
+            );
+        }
 
         $form->endCol();
 
-
         /*
-        |--------------------------------------------------------------------------
-        | Confirmar Password
-        |--------------------------------------------------------------------------
-        */
+         * Confirmación
+         */
 
         $form->startCol(6, 'md');
 
@@ -241,8 +394,12 @@ class UserFormBuilder
             'password',
             'confirm_password',
             '',
-            'Confirmar contraseña',
-            'required,minlength=8,autocomplete=new-password,placeholder=Repita la contraseña'
+            $editing
+                ? 'Confirmar nueva contraseña'
+                : 'Confirmar contraseña',
+            $editing
+                ? 'minlength=8,autocomplete=new-password,placeholder=Repita la nueva contraseña'
+                : 'required,minlength=8,autocomplete=new-password,placeholder=Repita la contraseña'
         );
 
         $form->endCol();
@@ -251,25 +408,35 @@ class UserFormBuilder
 
         $this->closeSection($form);
 
-
         /*
         |--------------------------------------------------------------------------
-        | DATOS PERSONALES
+        | INFORMACIÓN PERSONAL
         |--------------------------------------------------------------------------
         */
 
         $this->openSection(
             $form,
             'fa-solid fa-id-card',
-            'Datos personales',
-            'Información asociada al perfil médico'
+            'Información personal',
+            'Datos asociados al perfil utilizado para los controles médicos.'
         );
 
         /*
-        |--------------------------------------------------------------------------
-        | Persona
-        |--------------------------------------------------------------------------
-        */
+         * IMPORTANTE:
+         *
+         * PHP Form Builder 6.2 tiene problemas con campos como:
+         *
+         * persona[numero_documento]
+         *
+         * Por eso utilizamos nombres planos:
+         *
+         * persona_tipo_documento
+         * persona_numero_documento
+         * persona_parentesco
+         *
+         * CreateUserRequest / UpdateUserRequest los transforman
+         * posteriormente mediante prepareForValidation().
+         */
 
         $tipoDocumento = old(
             'persona_tipo_documento',
@@ -295,13 +462,17 @@ class UserFormBuilder
             )
         );
 
+        /*
+        |--------------------------------------------------------------------------
+        | Documento
+        |--------------------------------------------------------------------------
+        */
+
         $form->startRow('g-3');
 
         /*
-        |--------------------------------------------------------------------------
-        | Tipo documento
-        |--------------------------------------------------------------------------
-        */
+         * Tipo documento
+         */
 
         $form->startCol(4, 'md');
 
@@ -349,12 +520,9 @@ class UserFormBuilder
 
         $form->endCol();
 
-
         /*
-        |--------------------------------------------------------------------------
-        | Número documento
-        |--------------------------------------------------------------------------
-        */
+         * Número documento
+         */
 
         $form->startCol(4, 'md');
 
@@ -369,17 +537,14 @@ class UserFormBuilder
             'persona_numero_documento',
             (string) $numeroDocumento,
             'Número de documento',
-            'required,id=numero_documento,maxlength=20,placeholder=Número de documento'
+            'required,id=numero_documento,maxlength=20,placeholder=Ingrese el número'
         );
 
         $form->endCol();
 
-
         /*
-        |--------------------------------------------------------------------------
-        | Parentesco
-        |--------------------------------------------------------------------------
-        */
+         * Parentesco
+         */
 
         $form->startCol(4, 'md');
 
@@ -422,14 +587,17 @@ class UserFormBuilder
 
         $form->endRow();
 
-
         /*
         |--------------------------------------------------------------------------
-        | Fecha / género
+        | Fecha nacimiento / género
         |--------------------------------------------------------------------------
         */
 
         $form->startRow('g-3');
+
+        /*
+         * Fecha
+         */
 
         $form->startCol(6, 'md');
 
@@ -452,6 +620,9 @@ class UserFormBuilder
 
         $form->endCol();
 
+        /*
+         * Género
+         */
 
         $form->startCol(6, 'md');
 
@@ -508,7 +679,6 @@ class UserFormBuilder
 
         $this->closeSection($form);
 
-
         /*
         |--------------------------------------------------------------------------
         | CONTACTO
@@ -519,11 +689,10 @@ class UserFormBuilder
             $form,
             'fa-solid fa-address-book',
             'Contacto',
-            'Teléfono y medios de contacto'
+            'Información telefónica del usuario.'
         );
 
         $form->startRow('g-3');
-
 
         /*
         |--------------------------------------------------------------------------
@@ -542,13 +711,23 @@ class UserFormBuilder
             Helpers::getCountryCode() as $option
         ) {
 
-            $attributes = '';
+            $attributes = [];
 
             if (
                 (string) $countryCode ===
                 (string) $option->calling_code
             ) {
-                $attributes = 'selected';
+                $attributes[] = 'selected';
+            }
+
+            if (!empty($option->flag)) {
+
+                $attributes[] =
+                    'data-image=' .
+                    asset(
+                        'assets/images/flags/' .
+                        $option->flag
+                    );
             }
 
             $form->addOption(
@@ -556,7 +735,7 @@ class UserFormBuilder
                 $option->calling_code,
                 '+' . $option->calling_code,
                 '',
-                $attributes
+                implode(',', $attributes)
             );
         }
 
@@ -567,7 +746,6 @@ class UserFormBuilder
         );
 
         $form->endCol();
-
 
         /*
         |--------------------------------------------------------------------------
@@ -600,10 +778,9 @@ class UserFormBuilder
 
         $this->closeSection($form);
 
-
         /*
         |--------------------------------------------------------------------------
-        | ACCESO
+        | ACCESO AL SISTEMA
         |--------------------------------------------------------------------------
         */
 
@@ -611,7 +788,7 @@ class UserFormBuilder
             $form,
             'fa-solid fa-shield-halved',
             'Acceso al sistema',
-            'Rol y estado de la cuenta'
+            'Configure el rol y estado del usuario.'
         );
 
         $form->startRow('g-3');
@@ -625,7 +802,10 @@ class UserFormBuilder
         $form->startCol(6, 'md');
 
         $selectedRole = old(
-            'role_id'
+            'role_id',
+            $user->roles
+                ->pluck('id')
+                ->first()
         );
 
         $form->addOption(
@@ -636,6 +816,10 @@ class UserFormBuilder
 
         foreach ($roles as $role) {
 
+            /*
+             * Conservamos el comportamiento que tenía Cuba:
+             * no mostrar ADMIN.
+             */
             if ($role->name === RoleEnum::ADMIN) {
                 continue;
             }
@@ -660,10 +844,9 @@ class UserFormBuilder
 
         $form->endCol();
 
-
         /*
         |--------------------------------------------------------------------------
-        | Estado
+        | Status
         |--------------------------------------------------------------------------
         */
 
@@ -706,7 +889,6 @@ class UserFormBuilder
 
         $this->closeSection($form);
 
-
         /*
         |--------------------------------------------------------------------------
         | UBICACIÓN
@@ -717,13 +899,50 @@ class UserFormBuilder
             $form,
             'fa-solid fa-location-dot',
             'Ubicación',
-            'Información geográfica del usuario'
+            'País, departamento/estado y ciudad de residencia.'
         );
 
-        $countryId = old(
+        /*
+        |--------------------------------------------------------------------------
+        | País actual
+        |--------------------------------------------------------------------------
+        */
+
+        $selectedCountryId = old(
             'country_id',
             $user->country_id ?? ''
         );
+
+        $selectedCountryName = '';
+
+        if (!empty($selectedCountryId)) {
+
+            $selectedCountryName =
+                $countries[$selectedCountryId]
+                ?? '';
+        }
+
+        $selectedCountryName = old(
+            'country_selector',
+            $selectedCountryName
+        );
+
+        /*
+         * addCountrySelect utiliza la sesión interna de
+         * PHP Form Builder para establecer la selección.
+         */
+        if (!isset($_SESSION['userForm'])) {
+            $_SESSION['userForm'] = [];
+        }
+
+        $_SESSION['userForm']['country_selector'] =
+            $selectedCountryName;
+
+        /*
+        |--------------------------------------------------------------------------
+        | State actual
+        |--------------------------------------------------------------------------
+        */
 
         $stateId = old(
             'state_id',
@@ -734,44 +953,43 @@ class UserFormBuilder
 
         /*
         |--------------------------------------------------------------------------
-        | País
+        | Country Select
         |--------------------------------------------------------------------------
         */
 
         $form->startCol(6, 'md');
 
-        $form->addOption(
-            'country_id',
-            '',
-            'Seleccione...'
+        $countryOptions = [
+            'plugin' => 'select2',
+            'lang' => 'en',
+            'flags' => true,
+            'flag_size' => 32,
+            'return_value' => 'name',
+        ];
+
+        $form->addCountrySelect(
+            'country_selector',
+            'País',
+            'id=country_selector,title=Seleccione un país',
+            $countryOptions
         );
 
-        foreach ($countries as $id => $country) {
-
-            $form->addOption(
-                'country_id',
-                $id,
-                $country,
-                '',
-                (string) $countryId ===
-                (string) $id
-                    ? 'selected'
-                    : ''
-            );
-        }
-
-        $form->addSelect(
+        /*
+         * ID real que será almacenado en users.country_id
+         */
+        $form->addInput(
+            'hidden',
             'country_id',
-            'País',
-            'id=country'
+            (string) $selectedCountryId,
+            '',
+            'id=country_id'
         );
 
         $form->endCol();
 
-
         /*
         |--------------------------------------------------------------------------
-        | Departamento
+        | Estado / Departamento
         |--------------------------------------------------------------------------
         */
 
@@ -783,12 +1001,12 @@ class UserFormBuilder
             'Seleccione...'
         );
 
-        if (!empty($countryId)) {
+        if (!empty($selectedCountryId)) {
 
             $states = State::query()
                 ->where(
                     'country_id',
-                    $countryId
+                    $selectedCountryId
                 )
                 ->orderBy('name')
                 ->get();
@@ -818,10 +1036,9 @@ class UserFormBuilder
 
         $form->endRow();
 
-
         /*
         |--------------------------------------------------------------------------
-        | Ciudad / Código postal
+        | Ciudad / Postal Code
         |--------------------------------------------------------------------------
         */
 
@@ -843,7 +1060,7 @@ class UserFormBuilder
                 $user->location ?? ''
             ),
             'Ciudad / ubicación',
-            'placeholder=Ingrese ciudad o ubicación'
+            'placeholder=Ingrese la ciudad o ubicación'
         );
 
         $form->endCol();
@@ -868,7 +1085,6 @@ class UserFormBuilder
 
         $this->closeSection($form);
 
-
         /*
         |--------------------------------------------------------------------------
         | PERFIL
@@ -879,42 +1095,107 @@ class UserFormBuilder
             $form,
             'fa-solid fa-image-portrait',
             'Perfil',
-            'Fotografía e información adicional'
+            'Fotografía e información adicional.'
         );
-
-        $form->startRow('g-3');
 
         /*
         |--------------------------------------------------------------------------
-        | Avatar
+        | Imagen actual en Edit
         |--------------------------------------------------------------------------
         */
 
-        $form->startCol(12, 'md');
+        if ($editing) {
+
+            $image = $user->getFirstMedia(
+                'image'
+            );
+
+            if ($image) {
+
+                $form->addHtml(
+                    '
+                    <div class="mb-4">
+
+                        <div class="d-flex align-items-center gap-3">
+
+                            <img
+                                src="' .
+                                    e($image->getUrl()) .
+                                '"
+                                alt="Avatar"
+                                class="rounded-circle border"
+                                width="90"
+                                height="90"
+                                style="object-fit: cover;"
+                            >
+
+                            <div>
+
+                                <div class="fw-semibold mb-1">
+                                    Fotografía actual
+                                </div>
+
+                                <div class="text-muted small mb-2">
+                                    Puede seleccionar otra fotografía para reemplazarla.
+                                </div>
+
+                                <a
+                                    href="' .
+                                        e(
+                                            route(
+                                                'admin.user.removeImage',
+                                                $user->id
+                                            )
+                                        ) .
+                                    '"
+                                    class="btn btn-sm btn-outline-danger"
+                                >
+
+                                    <i class="fa-solid fa-trash me-1"></i>
+
+                                    Eliminar fotografía
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    '
+                );
+            }
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Imagen / About Me
+        |--------------------------------------------------------------------------
+        */
+
+        $form->startRow('g-3');
+
+        $form->startCol(4, 'md');
 
         $form->addInput(
             'file',
             'image',
             '',
-            'Fotografía',
-            'accept=image/jpeg|image/png|image/webp'
+            $editing
+                ? 'Cambiar fotografía'
+                : 'Fotografía',
+            'accept=image/*'
         );
 
         $form->addHelper(
-            'JPG, PNG o WEBP. Máximo recomendado 5 MB.',
+            'Formatos permitidos: JPG, PNG o WEBP.',
             'image'
         );
 
         $form->endCol();
 
 
-        /*
-        |--------------------------------------------------------------------------
-        | About Me
-        |--------------------------------------------------------------------------
-        */
-
-        $form->startCol(12, 'md');
+        $form->startCol(8, 'md');
 
         $form->addTextarea(
             'about_me',
@@ -930,7 +1211,6 @@ class UserFormBuilder
 
         $form->endRow();
 
-
         /*
         |--------------------------------------------------------------------------
         | Bio
@@ -944,20 +1224,19 @@ class UserFormBuilder
                 $user->bio ?? ''
             ),
             'Biografía / Observaciones',
-            'rows=3,placeholder=Observaciones adicionales'
+            'rows=4,placeholder=Ingrese información adicional'
         );
 
         $this->closeSection($form);
 
-
         /*
         |--------------------------------------------------------------------------
-        | ACCIONES
+        | BOTONES
         |--------------------------------------------------------------------------
         */
 
         $form->startDiv(
-            'd-flex justify-content-end gap-2 mt-4'
+            'd-flex justify-content-end gap-2 mt-4 mb-4'
         );
 
         $form->addHtml(
@@ -965,7 +1244,7 @@ class UserFormBuilder
                 href="' .
                 e(route('admin.user.index')) .
                 '"
-                class="btn btn-light"
+                class="btn btn-light px-4"
             >
                 <i class="fa-solid fa-arrow-left me-1"></i>
                 Cancelar
@@ -976,17 +1255,17 @@ class UserFormBuilder
             'submit',
             'submit',
             1,
-            '<i class="fa-solid fa-floppy-disk me-1"></i>
-             Guardar usuario',
+            $editing
+                ? '<i class="fa-solid fa-floppy-disk me-1"></i> Actualizar usuario'
+                : '<i class="fa-solid fa-floppy-disk me-1"></i> Guardar usuario',
             'class=btn btn-primary px-4'
         );
 
         $form->endDiv();
 
-
         /*
         |--------------------------------------------------------------------------
-        | Plugin de validación visual
+        | Validación visual PHP Form Builder
         |--------------------------------------------------------------------------
         */
 
@@ -995,13 +1274,158 @@ class UserFormBuilder
             '#userForm'
         );
 
+        /*
+        |--------------------------------------------------------------------------
+        | Javascript personalizado
+        |--------------------------------------------------------------------------
+        |
+        | Country Select devuelve el nombre del país.
+        |
+        | Nuestro User necesita countries.id.
+        |
+        | Convertimos:
+        |
+        | Peru -> 604
+        |
+        | y posteriormente cargamos los estados vía AJAX.
+        |
+        */
+
+        $countryMap = [];
+
+        foreach ($countries as $id => $name) {
+            $countryMap[$name] = $id;
+        }
+
+        $countryMapJson = json_encode(
+            $countryMap,
+            JSON_UNESCAPED_UNICODE |
+            JSON_UNESCAPED_SLASHES
+        );
+
+        $statesUrl = route(
+            'admin.user.get-states'
+        );
+
+        $form->addHtml(
+            '
+            <script>
+
+                document.addEventListener(
+                    "DOMContentLoaded",
+                    function () {
+
+                        const countryMap = ' .
+                            $countryMapJson .
+                        ';
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | Country Select
+                        |--------------------------------------------------------------------------
+                        */
+
+                        $("#country_selector").on(
+                            "change",
+                            function () {
+
+                                const countryName =
+                                    $(this).val();
+
+                                const countryId =
+                                    countryMap[countryName]
+                                    ?? "";
+
+                                /*
+                                 * ID real para Laravel.
+                                 */
+                                $("#country_id").val(
+                                    countryId
+                                );
+
+                                /*
+                                 * Reiniciar estados.
+                                 */
+                                $("#state").html(
+                                    \'<option value="">Cargando...</option>\'
+                                );
+
+                                if (!countryId) {
+
+                                    $("#state").html(
+                                        \'<option value="">Seleccione un país</option>\'
+                                    );
+
+                                    return;
+                                }
+
+                                $.ajax({
+
+                                    url: "' .
+                                        e($statesUrl) .
+                                    '",
+
+                                    type: "GET",
+
+                                    data: {
+                                        country_id: countryId
+                                    },
+
+                                    dataType: "json",
+
+                                    success: function (
+                                        result
+                                    ) {
+
+                                        $("#state").html(
+                                            \'<option value="">Seleccione...</option>\'
+                                        );
+
+                                        $.each(
+                                            result.states,
+                                            function (
+                                                key,
+                                                value
+                                            ) {
+
+                                                $("#state").append(
+                                                    $("<option>", {
+                                                        value:
+                                                            value.id,
+
+                                                        text:
+                                                            value.name
+                                                    })
+                                                );
+                                            }
+                                        );
+                                    },
+
+                                    error: function () {
+
+                                        $("#state").html(
+                                            \'<option value="">No se pudieron cargar los estados</option>\'
+                                        );
+                                    }
+
+                                });
+
+                            }
+                        );
+
+                    }
+                );
+
+            </script>
+            '
+        );
+
         return $form;
     }
 
-
     /*
     |--------------------------------------------------------------------------
-    | Secciones estilo Extended Users
+    | OPEN SECTION
     |--------------------------------------------------------------------------
     */
 
@@ -1016,33 +1440,52 @@ class UserFormBuilder
             'user-form-section card border-0 shadow-sm mb-4'
         );
 
-        $form->addHtml('
+        $form->addHtml(
+            '
             <div class="card-header bg-transparent border-bottom">
+
                 <div class="d-flex align-items-center">
 
                     <div class="section-icon me-3">
-                        <i class="' . e($icon) . '"></i>
+
+                        <i class="' .
+                            e($icon) .
+                        '"></i>
+
                     </div>
 
                     <div>
+
                         <h5 class="mb-1">
-                            ' . e($title) . '
+                            ' .
+                                e($title) .
+                            '
                         </h5>
 
                         <small class="text-muted">
-                            ' . e($description) . '
+                            ' .
+                                e($description) .
+                            '
                         </small>
+
                     </div>
 
                 </div>
+
             </div>
-        ');
+            '
+        );
 
         $form->startDiv(
             'card-body'
         );
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | CLOSE SECTION
+    |--------------------------------------------------------------------------
+    */
 
     private function closeSection(
         Form $form
@@ -1059,10 +1502,9 @@ class UserFormBuilder
         $form->endDiv();
     }
 
-
     /*
     |--------------------------------------------------------------------------
-    | Errores Laravel
+    | Laravel Errors
     |--------------------------------------------------------------------------
     */
 
@@ -1070,19 +1512,40 @@ class UserFormBuilder
         Form $form
     ): void {
 
-        $errors = session('errors');
+        $errors = session(
+            'errors'
+        );
 
-        if (!$errors || !$errors->any()) {
+        if (
+            !$errors ||
+            !$errors->any()
+        ) {
             return;
         }
 
         $html = '
-            <div class="alert alert-danger border-0 shadow-sm mb-4">
+            <div
+                class="
+                    alert
+                    alert-danger
+                    border-0
+                    shadow-sm
+                    mb-4
+                "
+            >
 
                 <div class="d-flex">
 
                     <div class="me-3">
-                        <i class="fa-solid fa-circle-exclamation fa-lg"></i>
+
+                        <i
+                            class="
+                                fa-solid
+                                fa-circle-exclamation
+                                fa-lg
+                            "
+                        ></i>
+
                     </div>
 
                     <div>
@@ -1094,7 +1557,9 @@ class UserFormBuilder
                         <ul class="mb-0 mt-2">
         ';
 
-        foreach ($errors->all() as $error) {
+        foreach (
+            $errors->all() as $error
+        ) {
 
             $html .=
                 '<li>' .
