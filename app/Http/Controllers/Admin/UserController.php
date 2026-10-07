@@ -17,6 +17,7 @@ use Illuminate\Contracts\Support\Renderable;
 use App\Http\Requests\Admin\CreateUserRequest;
 use App\Http\Requests\Admin\UpdateUserRequest;
 use App\Http\Requests\Admin\UpdateProfileRequest;
+use App\Services\Forms\UserFormBuilder;
 
 class UserController extends Controller
 {
@@ -44,10 +45,26 @@ class UserController extends Controller
      * Show the form for creating a new resource.
      * @return Renderable
      */
-    public function create(User $user)
-    {
-        $countries = Country::all()->pluck('name','id');
-        return view('admin.user.create', ['user' => $user,'roles' => $this->role->get()], compact('countries'));
+    public function create(
+        User $user,
+        UserFormBuilder $userFormBuilder
+    ) {
+        $countries = Country::query()
+            ->orderBy('name')
+            ->pluck('name', 'id');
+
+        $roles = $this->role->get();
+
+        $form = $userFormBuilder->create(
+            $user,
+            $roles,
+            $countries
+        );
+
+        return view(
+            'admin.user.create',
+            compact('user', 'form')
+        );
     }
 
     public function store(CreateUserRequest $request)

@@ -1,0 +1,17 @@
+{
+    "name": "migliori/phpformbuilder",
+    "description": "vendor packages for PHP Form Builder - https://www.phpformbuilder.pro",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gilles Migliori",
+            "email": "gilles.migliori@gmail.com"
+        }
+    ],
+    "require": {
+        "pelago/emogrifier": "^7.2",
+        "phpmailer/phpmailer": "^6.9",
+        "migliori/power-lite-pdo": "^1.0"
+    }
+}

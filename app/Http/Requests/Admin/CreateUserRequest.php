@@ -15,6 +15,25 @@ class CreateUserRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'persona' => [
+                'tipo_documento' => $this->input(
+                    'persona_tipo_documento'
+                ),
+
+                'numero_documento' => $this->input(
+                    'persona_numero_documento'
+                ),
+
+                'parentesco' => $this->input(
+                    'persona_parentesco'
+                ),
+            ],
+        ]);
+    }
+
     /**
      * Get the validation rules that apply to the request.
      */

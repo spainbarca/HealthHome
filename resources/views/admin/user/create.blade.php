@@ -3,11 +3,65 @@
 @section('title', 'Create User')
 
 @section('css')
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/animate.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/date-picker.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/dropzone.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/select2.css') }}">
+
+    {!! $form->getIncludes('css') !!}
+
+    <style>
+        .user-form-header {
+            padding: 1.5rem;
+            border-radius: 12px;
+            background: rgba(var(--bs-primary-rgb), .06);
+            border: 1px solid rgba(var(--bs-primary-rgb), .10);
+        }
+
+        .user-form-icon,
+        .section-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border-radius: 10px;
+            background: rgba(var(--bs-primary-rgb), .10);
+            color: var(--bs-primary);
+        }
+
+        .user-form-icon {
+            width: 52px;
+            height: 52px;
+            font-size: 22px;
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            font-size: 16px;
+        }
+
+        .user-form-section {
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .user-form-section .card-header {
+            padding: 1rem 1.25rem;
+        }
+
+        .user-form-section .card-body {
+            padding: 1.5rem;
+        }
+
+        #userForm .form-label {
+            font-weight: 500;
+        }
+
+        #userForm .input-group-text {
+            min-width: 44px;
+            justify-content: center;
+        }
+    </style>
+
 @endsection
+
 
 @section('main_content')
 
@@ -18,7 +72,7 @@
             <div class="row">
 
                 <div class="col-sm-6">
-                    <h3>Gestión de Usuarios</h3>
+                    <h3>Users Management</h3>
                 </div>
 
                 <div class="col-sm-6">
@@ -38,11 +92,11 @@
                         </li>
 
                         <li class="breadcrumb-item">
-                            Usuarios
+                            Users
                         </li>
 
                         <li class="breadcrumb-item active">
-                            Crear
+                            Create
                         </li>
 
                     </ol>
@@ -64,21 +118,22 @@
 
                 <div class="card">
 
-                    <div class="card-body">
+                    <div class="card-header">
 
-                        <form
-                            class="row g-3 custom-input"
-                            id="userForm"
-                            action="{{ route('admin.user.store') }}"
-                            method="POST"
-                            enctype="multipart/form-data"
-                        >
+                        <h5>
+                            Crear usuario
+                        </h5>
 
-                            @csrf
+                        <span>
+                            Registre la información del usuario
+                            y su perfil personal.
+                        </span>
 
-                            @include('admin.user.fields')
+                    </div>
 
-                        </form>
+                    <div class="col-12 col-xxl-10 mx-auto">
+<br>
+                        {!! $form->getCode() !!}
 
                     </div>
 
@@ -95,104 +150,8 @@
 
 @section('scripts')
 
-    <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.js') }}"></script>
-    <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.en.js') }}"></script>
-    <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.custom.js') }}"></script>
+    {!! $form->getIncludes('js') !!}
 
-    <script src="{{ asset('assets/js/select2/select2.full.min.js') }}"></script>
-
-    <script src="{{ asset('assets/js/bookmark/jquery.validate.min.js') }}"></script>
-    <script src="{{ asset('assets/js/custom-validation/validation.js') }}"></script>
-
-
-    {{-- País / Estado --}}
-    <script>
-
-        $(document).ready(function () {
-
-            $('#country').on('change', function () {
-
-                var idCountry = this.value;
-
-                $("#state").html(
-                    '<option value="">Cargando...</option>'
-                );
-
-                $.ajax({
-
-                    url: "{{ route('admin.user.get-states') }}",
-
-                    type: "GET",
-
-                    data: {
-                        country_id: idCountry,
-                        _token: '{{ csrf_token() }}'
-                    },
-
-                    dataType: 'json',
-
-                    success: function (result) {
-
-                        $("#state").html(
-                            '<option value="">-- Seleccionar --</option>'
-                        );
-
-                        $.each(result.states, function (key, value) {
-
-                            $("#state").append(
-                                '<option value="' +
-                                value.id +
-                                '">' +
-                                value.name +
-                                '</option>'
-                            );
-
-                        });
-
-                    }
-
-                });
-
-            });
-
-        });
-
-    </script>
-
-
-    {{-- Código país --}}
-    <script>
-
-        $(document).ready(function () {
-
-            $('#country_code').select2({
-
-                templateResult: function (option) {
-
-                    if (
-                        option.element &&
-                        option.element.dataset.image
-                    ) {
-
-                        return $(
-                            '<span>' +
-                            '<img src="' +
-                            option.element.dataset.image +
-                            '" width="20" height="15" /> ' +
-                            option.text +
-                            '</span>'
-                        );
-
-                    }
-
-                    return option.text;
-
-                }
-
-            });
-
-        });
-
-    </script>
+    {!! $form->getJsCode() !!}
 
 @endsection
