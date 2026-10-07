@@ -16,5 +16,11 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(CountriesSeeder::class);
         $this->call(StateSeeder::class);
+        $this->call([
+            TipoControlSeeder::class,
+            TipoParametroSeeder::class,
+            TipoControlParametroSeeder::class,
+            SintomaSeeder::class,
+        ]);
     }
 }
