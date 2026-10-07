@@ -34,6 +34,13 @@ class UserRepository extends BaseRepository
         DB::beginTransaction();
 
         try {
+
+            /*
+            |--------------------------------------------------------------------------
+            | Crear usuario
+            |--------------------------------------------------------------------------
+            */
+
             $user = $this->model->create([
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
@@ -53,20 +60,58 @@ class UserRepository extends BaseRepository
                 'bio' => $request->bio,
             ]);
 
-            if ($request->hasFile('image') && $request->file('image')->isValid()) {
-                $user->addMediaFromRequest('image')->toMediaCollection('image');
+            /*
+            |--------------------------------------------------------------------------
+            | Crear Persona relacionada
+            |--------------------------------------------------------------------------
+            */
+
+            $user->persona()->create([
+                'tipo_documento' => $request->input('persona.tipo_documento'),
+                'numero_documento' => $request->input('persona.numero_documento'),
+                'parentesco' => $request->input('persona.parentesco'),
+            ]);
+
+            /*
+            |--------------------------------------------------------------------------
+            | Imagen
+            |--------------------------------------------------------------------------
+            */
+
+            if (
+                $request->hasFile('image') &&
+                $request->file('image')->isValid()
+            ) {
+                $user
+                    ->addMediaFromRequest('image')
+                    ->toMediaCollection('image');
             }
+
+            /*
+            |--------------------------------------------------------------------------
+            | Rol
+            |--------------------------------------------------------------------------
+            */
 
             if ($request->role_id) {
-                $role = $this->role->findOrFail($request->role_id);
+
+                $role = $this->role->findOrFail(
+                    $request->role_id
+                );
+
                 $user->assignRole($role);
             }
-            
+
             DB::commit();
 
-            return redirect()->route('admin.user.index')->with('success', __('User Created Successfully'));
+            return redirect()
+                ->route('admin.user.index')
+                ->with(
+                    'success',
+                    __('User Created Successfully')
+                );
 
-        } catch (Exception $e){
+        } catch (Exception $e) {
 
             DB::rollback();
 
@@ -80,11 +125,41 @@ class UserRepository extends BaseRepository
 
         try {
 
+            /*
+            |--------------------------------------------------------------------------
+            | Buscar usuario
+            |--------------------------------------------------------------------------
+            */
+
             $user = $this->model->findOrFail($id);
-            $user->update([
+
+            /*
+            |--------------------------------------------------------------------------
+            | Usuario reservado
+            |--------------------------------------------------------------------------
+            */
+
+            if ($user->system_reserve) {
+
+                DB::rollback();
+
+                return redirect()
+                    ->back()
+                    ->with(
+                        'error',
+                        __('This user cannot be update, It is system reserved.')
+                    );
+            }
+
+            /*
+            |--------------------------------------------------------------------------
+            | Datos del usuario
+            |--------------------------------------------------------------------------
+            */
+
+            $data = [
                 'country_code' => $request->country_code,
                 'email' => $request->email,
-                'password' => Hash::make($request->password),
                 'phone' => (string) $request->phone,
                 'status' => $request->status,
                 'dob' => $request->dob,
@@ -98,25 +173,89 @@ class UserRepository extends BaseRepository
                 'skills' => $request->skills,
                 'about_me' => $request->about_me,
                 'bio' => $request->bio,
-            ]);
+            ];
 
-            $user = $this->model->findOrFail($id);
-            if ($user->system_reserve) {
-                return redirect()->back()->with('error', __('This user cannot be update, It is system reserved.'));
+            /*
+            |--------------------------------------------------------------------------
+            | Actualizar contraseña solamente si fue ingresada
+            |--------------------------------------------------------------------------
+            */
+
+            if ($request->filled('password')) {
+                $data['password'] = Hash::make(
+                    $request->password
+                );
             }
-            
-            if (isset($request->role_id)) {
-                $role = $this->role->find($request->role_id);
+
+            $user->update($data);
+
+            /*
+            |--------------------------------------------------------------------------
+            | Crear o actualizar Persona
+            |--------------------------------------------------------------------------
+            |
+            | updateOrCreate es importante porque pueden existir usuarios antiguos
+            | de Cuba que todavía no tengan registro en personas.
+            |
+            */
+
+            $user->persona()->updateOrCreate(
+                [
+                    'user_id' => $user->id,
+                ],
+                [
+                    'tipo_documento' =>
+                        $request->input('persona.tipo_documento'),
+
+                    'numero_documento' =>
+                        $request->input('persona.numero_documento'),
+
+                    'parentesco' =>
+                        $request->input('persona.parentesco'),
+                ]
+            );
+
+            /*
+            |--------------------------------------------------------------------------
+            | Rol
+            |--------------------------------------------------------------------------
+            */
+
+            if ($request->filled('role_id')) {
+
+                $role = $this->role->findOrFail(
+                    $request->role_id
+                );
+
                 $user->syncRoles($role);
             }
 
-            if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            /*
+            |--------------------------------------------------------------------------
+            | Imagen
+            |--------------------------------------------------------------------------
+            */
+
+            if (
+                $request->hasFile('image') &&
+                $request->file('image')->isValid()
+            ) {
+
                 $user->clearMediaCollection('image');
-                $user->addMediaFromRequest('image')->toMediaCollection('image');
+
+                $user
+                    ->addMediaFromRequest('image')
+                    ->toMediaCollection('image');
             }
 
             DB::commit();
-            return redirect()->route('admin.user.index')->with('success', __('User Updated Successfully'));
+
+            return redirect()
+                ->route('admin.user.index')
+                ->with(
+                    'success',
+                    __('User Updated Successfully')
+                );
 
         } catch (Exception $e) {
 

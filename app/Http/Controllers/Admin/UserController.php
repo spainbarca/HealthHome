@@ -72,6 +72,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $user->load('persona');
         $countries = Country::all()->pluck('name','id');
         return view('admin.user.edit', ['user' => $user, 'roles' => $this->role->get()], compact('countries'));
     }
@@ -108,7 +109,7 @@ class UserController extends Controller
     {
         return $this->repository->destroy($user->id);
     }
-    
+
     /**
      * Show the form for creating a new resource.
      * @return Renderable

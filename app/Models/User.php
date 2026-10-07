@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -60,7 +61,6 @@ class User extends Authenticatable implements HasMedia
         return [
            'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'phone' => 'integer',
             'status' => 'integer',
             'created_by_id' => 'integer'
         ];
@@ -101,5 +101,10 @@ class User extends Authenticatable implements HasMedia
     public function country()
     {
         return $this->belongsTo(Country::class,'country_id');
+    }
+
+    public function persona(): HasOne
+    {
+        return $this->hasOne(Persona::class, 'user_id');
     }
 }

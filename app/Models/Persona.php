@@ -4,27 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Persona extends Model
 {
     protected $table = 'personas';
 
     protected $fillable = [
-        'nombres',
-        'apellido_paterno',
-        'apellido_materno',
+        'user_id',
         'tipo_documento',
         'numero_documento',
-        'fecha_nacimiento',
-        'sexo',
         'parentesco',
-        'activo',
-        'foto'
-    ];
-
-    protected $casts = [
-        'fecha_nacimiento' => 'date',
-        'activo' => 'boolean',
     ];
 
     /*
@@ -33,9 +23,17 @@ class Persona extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     public function sesionesControl(): HasMany
     {
-        return $this->hasMany(SesionControl::class, 'persona_id');
+        return $this->hasMany(
+            SesionControl::class,
+            'persona_id'
+        );
     }
 
     /*
@@ -46,10 +44,9 @@ class Persona extends Model
 
     public function getNombreCompletoAttribute(): string
     {
-        return trim(
-            $this->nombres . ' ' .
-            $this->apellido_paterno . ' ' .
-            $this->apellido_materno
-        );
+        return trim(implode(' ', array_filter([
+            $this->user?->first_name,
+            $this->user?->last_name
+        ])));
     }
 }

@@ -1,0 +1,66 @@
+# Laravel
+/vendor/
+/node_modules/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Laravel cache
+/bootstrap/cache/*
+!/bootstrap/cache/.gitignore
+
+# Storage
+/storage/*.key
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/logs/*
+/storage/app/private/*
+
+# Public storage symlink
+/public/storage
+
+# Vite / Build
+/public/build
+/public/hot
+
+# PHPUnit
+.phpunit.result.cache
+.phpunit.cache/
+
+# Composer
+composer.phar
+
+# NPM / Yarn
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# IDE
+.idea/
+.vscode/
+*.code-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Laravel / PHP tools
+.php-cs-fixer.cache
+.phpunit.cache/
+.phpactor.json
+.phpstan.cache
+
+# Homestead
+Homestead.json
+Homestead.yaml
+
+# Docker overrides
+docker-compose.override.yml
