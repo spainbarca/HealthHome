@@ -31,6 +31,7 @@ class ComposerStaticInit32641cb0f2c4f29ef52741a9c6dc6f59
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
         '9d2b9fc6db0f153a0a149fefb182415e' => __DIR__ . '/..' . '/symfony/polyfill-php84/bootstrap.php',
+        '29ffe97919493792170d47eb03a68da9' => __DIR__ . '/..' . '/blade-ui-kit/blade-icons/src/helpers.php',
         '476ca15b8d69b04665cd879be9cb4c68' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Collections/functions.php',
         '265b4faa2b3a9766332744949e83bf97' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Collections/helpers.php',
         'c7a3c339e7e14b60e06a2d7fcce9476b' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Events/functions.php',
@@ -210,6 +211,7 @@ class ComposerStaticInit32641cb0f2c4f29ef52741a9c6dc6f59
         'B' => 
         array (
             'Brick\\Math\\' => 11,
+            'BladeUI\\Icons\\' => 14,
         ),
         'A' => 
         array (
@@ -228,12 +230,12 @@ class ComposerStaticInit32641cb0f2c4f29ef52741a9c6dc6f59
         ),
         'Yajra\\DataTables\\' => 
         array (
-            0 => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src',
-            1 => __DIR__ . '/..' . '/yajra/laravel-datatables-fractal/src',
-            2 => __DIR__ . '/..' . '/yajra/laravel-datatables-buttons/src',
-            3 => __DIR__ . '/..' . '/yajra/laravel-datatables-html/src',
-            4 => __DIR__ . '/..' . '/yajra/laravel-datatables-export/src',
-            5 => __DIR__ . '/..' . '/yajra/laravel-datatables-editor/src',
+            0 => __DIR__ . '/..' . '/yajra/laravel-datatables-buttons/src',
+            1 => __DIR__ . '/..' . '/yajra/laravel-datatables-editor/src',
+            2 => __DIR__ . '/..' . '/yajra/laravel-datatables-export/src',
+            3 => __DIR__ . '/..' . '/yajra/laravel-datatables-fractal/src',
+            4 => __DIR__ . '/..' . '/yajra/laravel-datatables-html/src',
+            5 => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src',
         ),
         'Whoops\\' => 
         array (
@@ -421,8 +423,8 @@ class ComposerStaticInit32641cb0f2c4f29ef52741a9c6dc6f59
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -470,8 +472,8 @@ class ComposerStaticInit32641cb0f2c4f29ef52741a9c6dc6f59
         ),
         'Nette\\' => 
         array (
-            0 => __DIR__ . '/..' . '/nette/utils/src',
-            1 => __DIR__ . '/..' . '/nette/schema/src',
+            0 => __DIR__ . '/..' . '/nette/schema/src',
+            1 => __DIR__ . '/..' . '/nette/utils/src',
         ),
         'Monolog\\' => 
         array (
@@ -491,8 +493,8 @@ class ComposerStaticInit32641cb0f2c4f29ef52741a9c6dc6f59
         ),
         'League\\Uri\\' => 
         array (
-            0 => __DIR__ . '/..' . '/league/uri-interfaces',
-            1 => __DIR__ . '/..' . '/league/uri',
+            0 => __DIR__ . '/..' . '/league/uri',
+            1 => __DIR__ . '/..' . '/league/uri-interfaces',
         ),
         'League\\MimeTypeDetection\\' => 
         array (
@@ -655,6 +657,10 @@ class ComposerStaticInit32641cb0f2c4f29ef52741a9c6dc6f59
         array (
             0 => __DIR__ . '/..' . '/brick/math/src',
         ),
+        'BladeUI\\Icons\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/blade-ui-kit/blade-icons/src',
+        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
@@ -699,14 +705,23 @@ class ComposerStaticInit32641cb0f2c4f29ef52741a9c6dc6f59
         'App\\Http\\Requests\\Admin\\UpdateRoleRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Admin/UpdateRoleRequest.php',
         'App\\Http\\Requests\\Admin\\UpdateTagRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Admin/UpdateTagRequest.php',
         'App\\Http\\Requests\\Admin\\UpdateUserRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Admin/UpdateUserRequest.php',
+        'App\\Models\\ArchivoAdjunto' => __DIR__ . '/../..' . '/app/Models/ArchivoAdjunto.php',
         'App\\Models\\Attachment' => __DIR__ . '/../..' . '/app/Models/Attachment.php',
         'App\\Models\\Blog' => __DIR__ . '/../..' . '/app/Models/Blog.php',
         'App\\Models\\Category' => __DIR__ . '/../..' . '/app/Models/Category.php',
         'App\\Models\\Country' => __DIR__ . '/../..' . '/app/Models/Country.php',
+        'App\\Models\\Dispositivo' => __DIR__ . '/../..' . '/app/Models/Dispositivo.php',
+        'App\\Models\\Medicion' => __DIR__ . '/../..' . '/app/Models/Medicion.php',
+        'App\\Models\\MedicionValor' => __DIR__ . '/../..' . '/app/Models/MedicionValor.php',
         'App\\Models\\Module' => __DIR__ . '/../..' . '/app/Models/Module.php',
         'App\\Models\\Page' => __DIR__ . '/../..' . '/app/Models/Page.php',
+        'App\\Models\\Persona' => __DIR__ . '/../..' . '/app/Models/Persona.php',
+        'App\\Models\\SesionControl' => __DIR__ . '/../..' . '/app/Models/SesionControl.php',
+        'App\\Models\\Sintoma' => __DIR__ . '/../..' . '/app/Models/Sintoma.php',
         'App\\Models\\State' => __DIR__ . '/../..' . '/app/Models/State.php',
         'App\\Models\\Tag' => __DIR__ . '/../..' . '/app/Models/Tag.php',
+        'App\\Models\\TipoControl' => __DIR__ . '/../..' . '/app/Models/TipoControl.php',
+        'App\\Models\\TipoParametro' => __DIR__ . '/../..' . '/app/Models/TipoParametro.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Policies\\BlogPolicy' => __DIR__ . '/../..' . '/app/Policies/BlogPolicy.php',
         'App\\Policies\\CategoryPolicy' => __DIR__ . '/../..' . '/app/Policies/CategoryPolicy.php',
@@ -722,7 +737,20 @@ class ComposerStaticInit32641cb0f2c4f29ef52741a9c6dc6f59
         'App\\Repositories\\Admin\\RoleRepository' => __DIR__ . '/../..' . '/app/Repositories/Admin/RoleRepository.php',
         'App\\Repositories\\Admin\\TagRepository' => __DIR__ . '/../..' . '/app/Repositories/Admin/TagRepository.php',
         'App\\Repositories\\Admin\\UserRepository' => __DIR__ . '/../..' . '/app/Repositories/Admin/UserRepository.php',
+        'App\\Services\\Forms\\UserFormBuilder' => __DIR__ . '/../..' . '/app/Services/Forms/UserFormBuilder.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
+        'BladeUI\\Icons\\BladeIconsServiceProvider' => __DIR__ . '/..' . '/blade-ui-kit/blade-icons/src/BladeIconsServiceProvider.php',
+        'BladeUI\\Icons\\Components\\Icon' => __DIR__ . '/..' . '/blade-ui-kit/blade-icons/src/Components/Icon.php',
+        'BladeUI\\Icons\\Components\\Svg' => __DIR__ . '/..' . '/blade-ui-kit/blade-icons/src/Components/Svg.php',
+        'BladeUI\\Icons\\Concerns\\RendersAttributes' => __DIR__ . '/..' . '/blade-ui-kit/blade-icons/src/Concerns/RendersAttributes.php',
+        'BladeUI\\Icons\\Console\\CacheCommand' => __DIR__ . '/..' . '/blade-ui-kit/blade-icons/src/Console/CacheCommand.php',
+        'BladeUI\\Icons\\Console\\ClearCommand' => __DIR__ . '/..' . '/blade-ui-kit/blade-icons/src/Console/ClearCommand.php',
+        'BladeUI\\Icons\\Exceptions\\CannotRegisterIconSet' => __DIR__ . '/..' . '/blade-ui-kit/blade-icons/src/Exceptions/CannotRegisterIconSet.php',
+        'BladeUI\\Icons\\Exceptions\\SvgNotFound' => __DIR__ . '/..' . '/blade-ui-kit/blade-icons/src/Exceptions/SvgNotFound.php',
+        'BladeUI\\Icons\\Factory' => __DIR__ . '/..' . '/blade-ui-kit/blade-icons/src/Factory.php',
+        'BladeUI\\Icons\\Generation\\IconGenerator' => __DIR__ . '/..' . '/blade-ui-kit/blade-icons/src/Generation/IconGenerator.php',
+        'BladeUI\\Icons\\IconsManifest' => __DIR__ . '/..' . '/blade-ui-kit/blade-icons/src/IconsManifest.php',
+        'BladeUI\\Icons\\Svg' => __DIR__ . '/..' . '/blade-ui-kit/blade-icons/src/Svg.php',
         'Brick\\Math\\BigDecimal' => __DIR__ . '/..' . '/brick/math/src/BigDecimal.php',
         'Brick\\Math\\BigInteger' => __DIR__ . '/..' . '/brick/math/src/BigInteger.php',
         'Brick\\Math\\BigNumber' => __DIR__ . '/..' . '/brick/math/src/BigNumber.php',
@@ -908,7 +936,11 @@ class ComposerStaticInit32641cb0f2c4f29ef52741a9c6dc6f59
         'Database\\Seeders\\CountriesSeeder' => __DIR__ . '/../..' . '/database/seeders/CountriesSeeder.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
         'Database\\Seeders\\RoleSeeder' => __DIR__ . '/../..' . '/database/seeders/RoleSeeder.php',
+        'Database\\Seeders\\SintomaSeeder' => __DIR__ . '/../..' . '/database/seeders/SintomaSeeder.php',
         'Database\\Seeders\\StateSeeder' => __DIR__ . '/../..' . '/database/seeders/StateSeeder.php',
+        'Database\\Seeders\\TipoControlParametroSeeder' => __DIR__ . '/../..' . '/database/seeders/TipoControlParametroSeeder.php',
+        'Database\\Seeders\\TipoControlSeeder' => __DIR__ . '/../..' . '/database/seeders/TipoControlSeeder.php',
+        'Database\\Seeders\\TipoParametroSeeder' => __DIR__ . '/../..' . '/database/seeders/TipoParametroSeeder.php',
         'DateError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateError.php',
         'DateException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateException.php',
         'DateInvalidOperationException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateInvalidOperationException.php',

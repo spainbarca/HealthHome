@@ -122,28 +122,177 @@
         </div>
 
         <div class="card">
-    <div class="card-header">
-        <h5>Prueba Health Icons</h5>
-    </div>
-
-    <div class="card-body">
-
-        <div class="d-flex align-items-center gap-4">
-
-            <div class="text-center">
-                <i class="healthicons-blood-bag fs-1 text-danger"></i>
-                <p class="mt-2">Blood Bag</p>
+            <div class="card-header">
+                <h5>Prueba Health Icons</h5>
             </div>
 
-            <div class="text-center">
-                <i class="healthicons-dialysis fs-1 text-primary"></i>
-                <p class="mt-2">Dialysis</p>
-            </div>
+            <div class="card-body">
 
+                <div class="d-flex align-items-center gap-4">
+
+                    <div class="text-center">
+                        <i class="healthicons-blood-bag fs-1 text-danger"></i>
+                        <p class="mt-2">Blood Bag</p>
+                    </div>
+
+                    <div class="text-center">
+                        <i class="healthicons-dialysis fs-1 text-primary"></i>
+                        <p class="mt-2">Dialysis</p>
+                    </div>
+
+                </div>
+
+            </div>
         </div>
 
-    </div>
+        <div class="card">
+            <div class="card-header">
+                <h5>Prueba Remix Icon</h5>
+            </div>
+
+            <div class="card-body">
+                <div class="d-flex gap-4 align-items-center">
+
+                    <i class="ri-user-line fs-1 text-primary"></i>
+
+                    <i class="ri-heart-pulse-line fs-1 text-danger"></i>
+
+                    <i class="ri-file-list-3-line fs-1 text-success"></i>
+
+                    <i class="ri-settings-3-line fs-1 text-warning"></i>
+
+                    <i class="ri-save-3-line fs-1 text-info"></i>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h5>Phosphor Icons</h5>
+            </div>
+
+            <div class="card-body">
+
+                <div class="d-flex align-items-center gap-4">
+
+                    <i class="ph ph-user fs-1 text-primary"></i>
+
+                    <i class="ph-light ph-heart fs-1 text-danger"></i>
+
+                    <i class="ph-bold ph-house fs-1 text-success"></i>
+
+                    <i class="ph-fill ph-gear fs-1 text-warning"></i>
+
+                    <i class="ph-duotone ph-stethoscope fs-1 text-info"></i>
+
+                    <i class="ph-thin ph-calendar fs-1"></i>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h5>Streamline Icons</h5>
+            </div>
+
+            <div class="card-body">
+
+                <div class="d-flex align-items-center gap-4">
+
+                    <div class="text-center">
+                        <x-streamline-icon
+                            name="sharp/line/interface-essential/new-file"
+                            size="32"
+                            class="text-primary monochrome"
+                        />
+
+                        <p class="mt-2">32 px</p>
+                    </div>
+
+                    <div class="text-center">
+                        <x-streamline-icon
+                            name="memes/memes-hand-drawn/nyan-cat-hand-drawn"
+                            size="128"
+                            class="text-danger monochrome"
+                        />
+
+                        <p class="mt-2">128 px</p>
+                    </div>
+
+                    <div class="text-center">
+                        <x-streamline-icon
+                            name="core/gradient/mail/chat-bubble-square-question"
+                            size="64"
+                            class="text-success monochrome"
+                        />
+
+                        <p class="mt-2">64 px</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h5>Prueba de Iconify</h5>
+            </div>
+
+            <div class="card-body">
+                <div class="d-flex align-items-center gap-4">
+
+                    <iconify-icon
+                        icon="mdi:heart-pulse"
+                        width="40"
+                        class="text-danger">
+                    </iconify-icon>
+
+                    <iconify-icon
+                        icon="ph:heartbeat"
+                        width="40"
+                        class="text-primary">
+                    </iconify-icon>
+
+                    <iconify-icon
+                        icon="lucide:activity"
+                        width="40"
+                        class="text-success">
+                    </iconify-icon>
+
+                    <iconify-icon
+                        icon="material-symbols:ecg-heart"
+                        width="40"
+                        class="text-warning">
+                    </iconify-icon>
+
+                    <iconify-icon
+    icon="noto:broccoli"
+    width="48"
+    height="48">
+</iconify-icon>
+<iconify-icon icon="logos:broccoli"></iconify-icon>
+<iconify-icon
+    icon="logos:broccoli"
+    width="48">
+</iconify-icon>
+<iconify-icon icon="streamline-ultimate-color:binocular" width="48"></iconify-icon>
+<iconify-icon icon="zondicons:battery-full" width="48"></iconify-icon>
+
+<div class="d-flex gap-4 align-items-center">
+
+    <i class="uil uil-heart fs-1 text-danger"></i>
+
+    <i class="uil uil-comments fs-1 text-primary"></i>
+
 </div>
+
+                </div>
+            </div>
+        </div>
     </div>
     <!-- Container-fluid Ends-->
 @endsection

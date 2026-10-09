@@ -56,6 +56,60 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/healthicons/healthicons-outline.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/healthicons/healthicons-outline-24px.css') }}">
 
+    {{-- ============================================== --}}
+    {{-- Remix Icon 4.9.1 --}}
+    {{-- ============================================== --}}
+
+    <link rel="stylesheet" href="{{ asset('assets/vendor/remixicon/fonts/remixicon.css') }}">
+
+    {{-- ====================================================== --}}
+    {{-- Phosphor Icons --}}
+    {{-- ====================================================== --}}
+
+    <link rel="stylesheet" href="{{ asset('assets/vendor/phosphor/src/regular/style.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets/vendor/phosphor/src/thin/style.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets/vendor/phosphor/src/light/style.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets/vendor/phosphor/src/bold/style.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets/vendor/phosphor/src/fill/style.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets/vendor/phosphor/src/duotone/style.css') }}">
+
+    /* ===============================================
+    Streamline Icons
+    ================================================ */
+
+    .streamline-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        vertical-align: middle;
+        line-height: 1;
+        flex-shrink: 0;
+    }
+
+    .streamline-icon svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+
+    {{-- =============================================== --}}
+    {{-- Iconify Web Component --}}
+    {{-- =============================================== --}}
+
+    <script
+    src="{{ asset('assets/vendor/iconify/iconify-icon.min.js') }}"
+></script>
+
+<link
+    rel="stylesheet"
+    href="{{ asset('assets/vendor/unicons/css/line.css') }}"
+>
+
     <!-- Tabler icons -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/tabler-icons/tabler-icons.min.css') }}">
 

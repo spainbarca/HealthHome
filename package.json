@@ -19,7 +19,9 @@
         "vite": "^6.0.7"
     },
     "dependencies": {
+        "@iconscout/unicons": "^4.2.0",
         "@tabler/icons-webfont": "^3.49.0",
+        "iconify-icon": "^3.0.3",
         "sass-loader": "^16.0.4"
     }
 }

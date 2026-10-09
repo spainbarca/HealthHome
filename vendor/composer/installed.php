@@ -1,15 +1,24 @@
 <?php return array(
     'root' => array(
         'name' => 'laravel/laravel',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => NULL,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '24bd685d0bf8be8f6423db368f32503b4f9c2576',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
+        'blade-ui-kit/blade-icons' => array(
+            'pretty_version' => '1.10.1',
+            'version' => '1.10.1.0',
+            'reference' => '6e072d021ea6249986c330b93293c33d0c4f0e34',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../blade-ui-kit/blade-icons',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'brick/math' => array(
             'pretty_version' => '0.14.8',
             'version' => '0.14.8.0',
@@ -434,9 +443,9 @@
             'dev_requirement' => false,
         ),
         'laravel/laravel' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => NULL,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '24bd685d0bf8be8f6423db368f32503b4f9c2576',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
