@@ -46,6 +46,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=block" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp&display=block" rel="stylesheet">
 
+    {{-- ============================================== --}}
+    {{-- Health Icons --}}
+    {{-- ============================================== --}}
+
+    <link rel="stylesheet" href="{{ asset('assets/vendor/healthicons/healthicons.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/healthicons/healthicons-filled.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/healthicons/healthicons-filled-24px.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/healthicons/healthicons-outline.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/healthicons/healthicons-outline-24px.css') }}">
+
+    <!-- Tabler icons -->
+    <link rel="stylesheet" href="{{ asset('assets/vendor/tabler-icons/tabler-icons.min.css') }}">
+
     <!-- ico-font-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/icofont.css') }}">
     <!-- Themify icon-->

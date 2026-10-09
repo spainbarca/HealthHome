@@ -120,6 +120,30 @@
                 </div>
             </div>
         </div>
+
+        <div class="card">
+    <div class="card-header">
+        <h5>Prueba Health Icons</h5>
+    </div>
+
+    <div class="card-body">
+
+        <div class="d-flex align-items-center gap-4">
+
+            <div class="text-center">
+                <i class="healthicons-blood-bag fs-1 text-danger"></i>
+                <p class="mt-2">Blood Bag</p>
+            </div>
+
+            <div class="text-center">
+                <i class="healthicons-dialysis fs-1 text-primary"></i>
+                <p class="mt-2">Dialysis</p>
+            </div>
+
+        </div>
+
+    </div>
+</div>
     </div>
     <!-- Container-fluid Ends-->
 @endsection
