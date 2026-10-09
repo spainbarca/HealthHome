@@ -84,9 +84,7 @@
                         <div class="btn-light1-primary b-r-15">
                             <div class="upcoming-box">
                                 <div class="upcoming-icon bg-primary">
-                                    <svg class="stroke-icon">
-                                        <use href="{{ asset('assets/svg/icon-sprite.svg#user-plus') }}"></use>
-                                    </svg>
+                                    <i class="fa-slab fa-regular fa-users fa-flip-horizontal fa-2xl"></i>
                                 </div>
                                 <p>User</p>
                                 <a href="{{ route('admin.user.create') }}" class="btn btn-primary">{{ __('Add User') }}</a>

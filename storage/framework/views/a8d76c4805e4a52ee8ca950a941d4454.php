@@ -1,5 +1,13 @@
     <!-- Font Awesome-->
-    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/fontawesome.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/fontawesome.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/solid.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/regular.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/light.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/duotone.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/brands.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/whiteboard-semibold.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/slab-regular.min.css')); ?>">
+
     <!-- ico-font-->
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/vendors/icofont.css')); ?>">
     <!-- Themify icon-->
