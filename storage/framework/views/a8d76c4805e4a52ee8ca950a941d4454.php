@@ -2,11 +2,49 @@
     <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/fontawesome.min.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/solid.min.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/regular.min.css')); ?>">
-    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/light.min.css')); ?>">
-    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/duotone.min.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/brands.min.css')); ?>">
-    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/whiteboard-semibold.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/chisel-regular.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/duotone.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/duotone-light.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/duotone-regular.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/duotone-thin.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/etch-solid.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/graphite-thin.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/jelly-duo-regular.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/jelly-fill-regular.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/jelly-regular.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/light.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/mosaic-solid.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/notdog-duo-solid.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/notdog-solid.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/pixel-regular.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/sharp-duotone-light.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/sharp-duotone-regular.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/sharp-duotone-solid.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/sharp-duotone-thin.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/sharp-light.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/sharp-regular.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/sharp-solid.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/sharp-thin.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/slab-duo-regular.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/slab-press-duo-regular.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/slab-press-regular.min.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/slab-regular.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/thin.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/thumbprint-light.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/utility-duo-semibold.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/utility-fill-semibold.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/utility-semibold.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/vellum-solid.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/fontawesome-pro-7.2.0/css/whiteboard-semibold.min.css')); ?>">
+
+    
+    
+    
+
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded&display=block" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=block" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp&display=block" rel="stylesheet">
 
     <!-- ico-font-->
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/vendors/icofont.css')); ?>">

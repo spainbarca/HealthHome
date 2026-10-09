@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/fontawesome-pro-7.2.0/css/slab-duo-regular.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/fontawesome-pro-7.2.0/css/slab-press-duo-regular.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/fontawesome-pro-7.2.0/css/slab-press-regular.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/fontawesome-pro-7.2.0/css/slab-regular.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/fontawesome-pro-7.2.0/css/thin.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/fontawesome-pro-7.2.0/css/thumbprint-light.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/fontawesome-pro-7.2.0/css/utility-duo-semibold.min.css') }}">
@@ -36,6 +37,14 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/fontawesome-pro-7.2.0/css/utility-semibold.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/fontawesome-pro-7.2.0/css/vellum-solid.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/fontawesome-pro-7.2.0/css/whiteboard-semibold.min.css') }}">
+
+    {{-- ====================================================== --}}
+    {{-- Google Material Symbols --}}
+    {{-- ====================================================== --}}
+
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded&display=block" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=block" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp&display=block" rel="stylesheet">
 
     <!-- ico-font-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/icofont.css') }}">
