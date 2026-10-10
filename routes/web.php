@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\Admin\DispositivoController;
+use App\Http\Controllers\Admin\PersonaController;
 
 
 
@@ -52,6 +53,9 @@ Route::group(['middleware' => ['auth'], 'as' => 'admin.', 'prefix' => 'admin'], 
 
     // Dispositivos
     Route::resource('dispositivos', DispositivoController::class);
+
+    // Personas
+    Route::resource('personas', PersonaController::class);
 
 
 // Dashboard

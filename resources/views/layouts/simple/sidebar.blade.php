@@ -85,6 +85,9 @@
                             @can('page.index')
                                 <li><a href="{{ route('admin.dispositivos.index') }}">Dispositivos</a></li>
                             @endcan
+                            @can('page.index')
+                                <li><a href="{{ route('admin.personas.index') }}">Personas</a></li>
+                            @endcan
                         </ul>
                     </li>
                     <li class="sidebar-list"><i class="fa-solid fa-thumbtack"></i><a class="sidebar-link sidebar-title"
