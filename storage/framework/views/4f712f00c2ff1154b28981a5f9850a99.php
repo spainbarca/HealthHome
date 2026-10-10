@@ -8,7 +8,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-sm-6">
-                    <h3>Add User</h3>
+                    <h3>Add Useeeer</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb">

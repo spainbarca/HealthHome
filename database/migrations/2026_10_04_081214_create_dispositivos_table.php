@@ -15,9 +15,8 @@ return new class extends Migration
             $table->id();
 
             $table->string('nombre');
-
             $table->string('tipo')->nullable();
-
+            $table->text('descripcion')->nullable();
             $table->string('marca')->nullable();
             $table->string('modelo')->nullable();
             $table->string('numero_serie')->nullable();

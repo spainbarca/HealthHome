@@ -11,6 +11,7 @@ class Dispositivo extends Model
 
     protected $fillable = [
         'nombre',
+        'descripcion',
         'tipo',
         'marca',
         'modelo',
