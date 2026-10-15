@@ -88,6 +88,9 @@
                             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('page.index')): ?>
                                 <li><a href="<?php echo e(route('admin.personas.index')); ?>">Personas</a></li>
                             <?php endif; ?>
+                            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('page.index')): ?>
+                                <li><a href="<?php echo e(route('admin.controles.index')); ?>">Control Médico</a></li>
+                            <?php endif; ?>
                         </ul>
                     </li>
                     <li class="sidebar-list"><i class="fa-solid fa-thumbtack"></i><a class="sidebar-link sidebar-title"

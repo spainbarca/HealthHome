@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\Admin\DispositivoController;
 use App\Http\Controllers\Admin\PersonaController;
-
+use App\Http\Controllers\Admin\ControlMedicoController;
 
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -56,6 +56,9 @@ Route::group(['middleware' => ['auth'], 'as' => 'admin.', 'prefix' => 'admin'], 
 
     // Personas
     Route::resource('personas', PersonaController::class);
+
+    // Control Médico
+    Route::resource('controles', ControlMedicoController::class)->parameters(['controles' => 'control']);
 
 
 // Dashboard
